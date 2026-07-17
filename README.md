@@ -3,7 +3,8 @@ What this is
 A static rebuild of `https://better-colleagues-144016.framer.app/` using plain HTML, CSS and a
 touch of vanilla JS (for the mobile nav toggle). No build step, no framework — it will deploy
 to Cloudflare Pages as-is.
-What was preserved exactly
+
+What was preserved exactly:
 All copy, word for word, from the live Framer site.
 Section order and structure (header, hero, stats bar, three-card service grid,
 "what we do" feature rows, about section, contact CTA, footer).

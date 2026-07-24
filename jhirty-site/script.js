@@ -16,3 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+// Email obfuscation: builds the contact address at runtime so it isn't
+// exposed as plain text in the page source
+document.addEventListener('DOMContentLoaded', function () {
+  var user = 'hello';
+  var domain = 'jhirty.com';
+  var link = document.getElementById('contact-email-btn');
+  if (link) {
+    link.setAttribute('href', 'mailto:' + user + '@' + domain);
+  }
+});

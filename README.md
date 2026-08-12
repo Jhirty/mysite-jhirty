@@ -1,83 +1,42 @@
-# JH Marketing — website (Cloudflare Pages ready)
+# JH Marketing — website (Cloudflare Pages)
 
 ## What this is
 A static site built with plain HTML, CSS and a touch of vanilla JS (for the mobile nav toggle).
-No build step, no framework — it deploys to Cloudflare Pages as-is.
+No build step, no framework — deploys to Cloudflare Pages as-is.
 
 ## Design direction
-White/off-white base with generous white space, **Space Grotesk** for headings and **Inter** for
-body copy, and a purple-to-pink gradient (`#7C3AED → #EC4899`) used as an accent across headlines,
-buttons and borders. The stats bar and the "About" section sit on black backgrounds for contrast
-against the otherwise light page.
+White/off-white base with generous white space, Space Grotesk (headings) and Inter (body), and a
+purple-to-pink brand gradient (`#7C3AED → #EC4899`) used as an accent across headlines, buttons,
+borders and the favicon mark. The stats bar and "About" section sit on black backgrounds for
+contrast against the otherwise light page.
 
-This is a design interpretation, not a pixel copy of the original Framer site. If this direction
-isn't the look you're after, let me know what you'd prefer (reference sites, a palette, mood
-images) and it can be restyled.
+## Status
+Live at `jhirty.com`. `jhirty.uk` redirects to `jhirty.com` (handled outside this repo).
 
-## Images
-Images are stored locally in the `/Images` folder and referenced directly in `index.html`
-(e.g. `Images/hero_image.jpeg`), rather than hot-linked from an external CDN.
+- Domain references consistent across `index.html`, `robots.txt` and `sitemap.xml` — done
+- Images stored locally in `/Images`, no external hot-linking — done
+- Favicons (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`) in `/Images`, linked correctly — done
+- Social share image (`og-cover.png`, 1200x630) in place and referenced in Open Graph/Twitter tags — done
+- **Open issue:** Apollo.io website tracker may not be firing — likely a Cloudflare Rocket Loader
+  conflict or a domain mismatch in Apollo's own tracking settings. Needs checking in DevTools
+  (Sources/Network tabs) and Cloudflare's Rocket Loader setting before it's confirmed fixed.
+- Google Analytics (gtag.js) also included, kept alongside Apollo
 
-## Outstanding before this goes live
-- **Domain consistency:** `index.html` (canonical tag, Open Graph tags, JSON-LD structured data)
-  already points to `https://www.jhirty.com/`, but `robots.txt` and `sitemap.xml` still reference
-  a placeholder domain (`https://www.jhmarketing.co.uk/`). These need to be updated to match
-  whichever domain is live — `jhirty.com` or `jhirty.uk`.
-- **Favicon path mismatch:** `favicon.svg` exists in `/Images`, but `index.html` looks for it at
-  the site root (`/favicon.svg`, `/favicon.ico`). Either move the file to the repo root or update
-  the `<link>` tags in `index.html` to point to `/Images/favicon.svg`.
-- **`apple-touch-icon.png`** is referenced in `index.html` but not yet present in the repo.
-- **`og-cover.jpg`** (1200×630px) is referenced as the social-share image but not yet present.
-- Once live, submit the site in Google Search Console and Bing Webmaster Tools, and submit
-  `sitemap.xml` there.
+## SEO
+Canonical tag, meta description, Open Graph/Twitter cards, JSON-LD structured data, robots.txt
+and sitemap.xml are all in place. This gives a clean, crawlable technical foundation — it won't
+by itself win rankings against established competitors on broad terms like "fractional CMO."
+Ongoing content (case studies, niche-specific pages) and backlinks are what move that needle over
+time.
 
-## Tracking currently included
-- Apollo.io website tracker
-- Google Analytics (gtag.js)
-
-Worth confirming these are the trackers you want live before deploying — happy to remove, add, or
-swap for something else (e.g. a cookie-consent-gated setup) if needed.
-
-## SEO — what's in place, and what it can and can't do
-What's in the code now:
-- Descriptive `<title>` and meta description, written around your actual services and location
-- `<link rel="canonical">` and a `robots` meta tag
-- Full Open Graph and Twitter Card tags, so links look right when shared on LinkedIn or elsewhere
-- JSON-LD structured data (`ProfessionalService` schema) listing your services, area served and
-  contact — this is what helps Google understand the business, not just the text
-- `robots.txt` and `sitemap.xml`
-- Clean heading hierarchy (one H1, structured H2/H3s) and descriptive image alt text
-
-Being honest about what this achieves: technical SEO like this makes the site crawlable, correctly
-understood by search engines, and credible-looking when shared or inspected — all genuinely
-useful, and worth having regardless. But in a competitive market like marketing consultancy,
-generic terms ("marketing agency," "fractional CMO") are dominated by sites with far more content,
-backlinks and domain history. This code gives a clean technical foundation; it won't by itself win
-rankings against established competitors on broad terms. What tends to move the needle from here is
-content (blog posts, case studies) targeting more specific searches — your actual niche and
-location combined, e.g. "fractional marketing leadership for IT services companies" or "marketing
-consultant Guildford Surrey" — plus backlinks and consistent publishing over time. Happy to help
-plan that content layer if useful.
-
-## Deploying to Cloudflare Pages
-
-**Option A — Drag and drop (fastest, no Git needed)**
-1. Go to the Cloudflare dashboard → Workers & Pages → Create → Pages → Upload assets.
-2. Drag this whole folder in (or a zip of it).
-3. Cloudflare gives you a live `*.pages.dev` URL immediately.
-4. Add a custom domain afterwards under your Pages project → Custom domains.
-
-**Option B — Git-connected (recommended for ongoing edits)**
-1. Push this folder to a GitHub or GitLab repository.
-2. In Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git.
-3. Select the repo. Build settings: no build command needed, output directory is `/` (root).
-4. Deploy — every future push updates the live site automatically.
+## Deploying
+Git-connected to Cloudflare Pages — pushing to the repo triggers an automatic redeploy. No build
+command needed, output directory is `/` (root).
 
 ## Files
-- `index.html` — page markup, copy, and SEO meta tags/structured data
+- `index.html` — markup, copy, SEO meta tags and structured data
 - `styles.css` — all styling
-- `script.js` — mobile menu toggle only
-- `_headers` — optional Cloudflare Pages caching rules
-- `robots.txt` — crawler rules and sitemap reference
-- `sitemap.xml` — sitemap for search engines
-- `Images/` — local image assets, including `favicon.svg`
+- `script.js` — mobile menu toggle
+- `_headers` — Cloudflare Pages caching rules
+- `robots.txt` / `sitemap.xml` — crawler rules and sitemap
+- `Images/` — all image assets, including favicons and og-cover.png

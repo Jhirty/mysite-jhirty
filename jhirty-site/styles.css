@@ -334,6 +334,74 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
   border-radius: var(--radius);
 }
 
+/* Testimonials — sits at the base of the About section */
+.testimonials { margin-top: 72px; }
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.testimonial {
+  position: relative;
+  margin: 0;
+  padding: 40px 36px 32px;
+  background: var(--charcoal);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+}
+/* Speech-bubble keyline: rounded card + a small triangular "tail" bottom-left */
+.testimonial::after {
+  content: "";
+  position: absolute;
+  left: 44px;
+  bottom: -13px;
+  width: 26px;
+  height: 26px;
+  background: var(--charcoal);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transform: rotate(45deg);
+  border-radius: 0 0 4px 0;
+}
+.testimonial .quote-mark {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 0.6;
+  font-weight: 700;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+}
+.testimonial p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.7;
+  margin: 0;
+}
+.testimonial footer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+}
+.testimonial cite {
+  font-style: normal;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+}
+.testimonial-role {
+  font-size: 13px;
+  color: var(--grey-dim);
+}
+
 .contact {
   background: var(--gradient);
   text-align: center;
@@ -386,6 +454,8 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
   .feature-row.reverse .feature-media,
   .feature-row.reverse .feature-copy { order: initial; }
   .about-inner { grid-template-columns: 1fr; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .testimonials { margin-top: 56px; }
 }
 
 @media (max-width: 560px) {
@@ -395,6 +465,7 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
   .hero-inner { padding-bottom: 56px; }
   .stat-bar-inner { padding: 56px 20px; }
   .btn-row { flex-direction: column; align-items: stretch; }
+  .testimonial { padding: 32px 24px 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -92,8 +92,15 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
 }
 .btn-primary {
   background: var(--gradient);
+  background-color: #7C3AED; /* solid fallback so no page background can show through the rounded corners */
   color: #fff;
   box-shadow: 0 8px 24px rgba(124,58,237,0.28);
+  /* Forces the browser to composite the gradient on its own layer, clipped
+     cleanly to the pill shape — fixes a rendering artefact (a thin stray
+     colour sliver at the rounded corner) that some browsers produce when a
+     diagonal gradient meets a large border-radius. */
+  -webkit-mask-image: -webkit-radial-gradient(circle, #fff 100%, #fff 100%);
+  mask-image: radial-gradient(circle, #fff 100%, #fff 100%);
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(236,72,153,0.35); }
 .btn-ghost {
@@ -102,6 +109,9 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
   border-color: var(--line);
 }
 .btn-ghost:hover { border-color: var(--pink); }
+/* Hero sits on a dark image, so its ghost button needs light text and a visible keyline */
+.hero-copy .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.4); }
+.hero-copy .btn-ghost:hover { border-color: var(--pink); }
 .btn-small { padding: 11px 22px; font-size: 14px; }
 .btn-large { padding: 19px 38px; font-size: 16px; }
 .btn-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 36px; }

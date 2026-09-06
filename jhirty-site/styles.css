@@ -146,40 +146,47 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
 .nav-toggle span { width: 22px; height: 2px; background: var(--ink); }
 
-/* Hero */
-.hero { padding-top: 88px; position: relative; overflow: hidden; }
-.hero::before {
-  content: "";
+/* Hero — full-bleed image across the top third, dark overlay for legible light type */
+.hero-full {
+  position: relative;
+  overflow: hidden;
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 88px;
+}
+.hero-bg {
   position: absolute;
-  top: -260px; right: -200px;
-  width: 640px; height: 640px;
-  background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, rgba(236,72,153,0.07) 45%, transparent 70%);
-  pointer-events: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   z-index: 0;
 }
-.hero-inner {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 72px;
-  align-items: center;
-  padding-bottom: 88px;
-  position: relative;
+.hero-overlay {
+  position: absolute;
+  inset: 0;
   z-index: 1;
+  /* Image already carries its own brand-tint gradient, so this is a lighter
+     bottom-weighted darken purely to keep the headline/lead legible. */
+  background: linear-gradient(180deg, rgba(10,10,12,0.35) 0%, rgba(10,10,12,0.15) 40%, rgba(10,10,12,0.55) 100%);
 }
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding-top: 64px;
+  padding-bottom: 88px;
+}
+.hero-copy { max-width: 640px; }
 .hero-copy h1 {
   font-size: clamp(36px, 4.6vw, 58px);
   line-height: 1.08;
   margin-bottom: 28px;
+  color: #fff;
 }
-.hero-copy .lead { font-size: 18px; max-width: 480px; }
-.hero-media {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  aspect-ratio: 6 / 5;
-  border: 1px solid var(--line);
-}
-.hero-media img { width: 100%; height: 100%; object-fit: cover; }
+.hero-copy .lead { font-size: 18px; max-width: 480px; color: rgba(255,255,255,0.78); }
 
 .stat-bar { background: var(--black); }
 .stat-bar-inner {
@@ -479,7 +486,7 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
 /* Responsive */
 @media (max-width: 900px) {
   .section { padding: 72px 0; }
-  .hero { padding-top: 72px; }
+  .hero-full { padding-top: 72px; min-height: 520px; }
   .hero-inner { padding-bottom: 72px; }
   .main-nav {
     display: none;
@@ -498,8 +505,6 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
   .main-nav a:last-child { border-bottom: none; }
   .header-inner { position: relative; flex-wrap: wrap; }
   .nav-toggle { display: flex; }
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-media { order: -1; }
   .stat-bar-inner { flex-direction: column; align-items: flex-start; gap: 28px; padding: 72px 28px; max-width: 100%; }
   .stat-desc { max-width: 100%; }
   .card-grid { grid-template-columns: 1fr; }
@@ -514,7 +519,7 @@ p { margin: 0; line-height: 1.65; color: var(--grey); }
 @media (max-width: 560px) {
   .wrap { padding: 0 20px; }
   .section { padding: 56px 0; }
-  .hero { padding-top: 56px; }
+  .hero-full { padding-top: 56px; min-height: 460px; }
   .hero-inner { padding-bottom: 56px; }
   .stat-bar-inner { padding: 56px 20px; }
   .btn-row { flex-direction: column; align-items: stretch; }
